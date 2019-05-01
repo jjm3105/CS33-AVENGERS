@@ -14,14 +14,14 @@ In the directory where `InfinityWar` is contained, type:
 ```
 gdb InfinityWar
 ```
-This will start running gdb so we can start running gdb commands! The following steps will go through an example of commands you can use to solve the first phase of InfinityWar. Only type in the commands that come after "gdb".
+This will start running gdb so we can start running gdb commands! The following steps will go through an example of commands you can use to solve the first phase of InfinityWar. Only type in the commands that come after "(gdb)".
 
 ```
 (gdb) run
 Starting program: /w/home.01/cs/ugrad/kristiel/InfinityWar 
 Please put in the first phrase: 
 ```
-The program is running.
+The program is running. If you ever want to interrupt the program and get back to the gdb prompt, type Ctrl-C. Once you're back in the gdb prompt, you can use the `run` command again to run the program from the start.
 
 ```
 (gdb) quit
