@@ -53,7 +53,7 @@ Disassembly of section .init:
 ...
 ```
 
-If we inspect the output of `objdump`, we will see many function names enclosed in angle brackets <> Take particular note of <main> which is the first function that is run. 
+If we inspect the output of `objdump`, we will see many function names enclosed in angle brackets <> Take particular note of main, which is the first function that is run. 
 
 ## Breakpoints
 
@@ -94,25 +94,22 @@ The arrow on the left tells you which instruction you are about to run.
 ## Printing the value of registers
 ```
 (gdb) print $rdi
-``` 
-Note the dollar sign before the register. This will print out what's inside rdi. Recall that rdi is the register that contains the first parameter, so it is particularly useful to print its value right before calling another function. Since the value inside rdi is 1, the output will be:
-```
 $1 = 1
-```
+``` 
+Note the dollar sign before the register. This will print out what's inside rdi. Recall that rdi is the register that contains the first parameter, so it is particularly useful to print its value right before calling another function. In this case, we are about to run `mov    $0x4008e0,%edi`, so the value 1 is in rdi before we move 0x4008e0 into the register. 
 
 ```
 (gdb) stepi
-``` 
-This runs the current assembly instruction. The output gives you the address of the following assembly instruction. Since we were previously at address `0x000000000040076d`, the output is:
-```
 0x0000000000400776	63	in Stones.c
-```
+``` 
+This runs the current assembly instruction. The output gives you the address of the following assembly instruction. Since we were previously at address `0x000000000040076d`, the next assembly address is at `0x0000000000400776`. 
+
 Notice that `0x0000000000400771 <+8>:	mov    $0x4008e0,%edi` has been run, which moved a new value into rdi. Let's print that value:
 ```
 (gdb) print $rdi
 $2 = 4196576
 ```
-This doesn't look like the value `$0x4008e0` that was moved into rdi, so what is going on? We didn't specify the print format, so the default was in decimal. To set the format to hexadecimal, we add "/x" to the print command. Also note that the print command can be shortened to p. 
+This doesn't look like the value `$0x4008e0`, so what is going on? We didn't specify the print format, so the default was in decimal. To set the format to hexadecimal, we add "/x" to the print command. Also note that the print command can be shortened to p. 
 ```
 (gdb) p/x $rdi
 $3 = 0x4008e0
