@@ -14,12 +14,14 @@ In the directory where `InfinityWar` is contained, type:
 ```
 gdb InfinityWar
 ```
-This will start running gdb so we can start running gdb commands! The following steps will go through an example of commands you can use to solve the first phase of InfinityWar. Only type in the commands that come after "gdb". The output or description is given after.
+This will start running gdb so we can start running gdb commands! The following steps will go through an example of commands you can use to solve the first phase of InfinityWar. Only type in the commands that come after "gdb".
 
 ```
 (gdb) run
+Starting program: /w/home.01/cs/ugrad/kristiel/InfinityWar 
+Please put in the first phrase: 
 ```
-Output: "Type a random phrase: "
+The program is running.
 
 ```
 (gdb) quit
@@ -59,36 +61,23 @@ Start up gdb again with `gdb InfinityWar`.
 
 ```
 (gdb) break main
+Breakpoint 1 at 0x400771: file Stones.c, line 63.
 ``` 
 This sets a break point at the main function
-Output: Breakpoint 1 at 0x400771: file Stones.c, line 63.
+
 
 ```
 (gdb) run
-``` 
-You'll stop execution just before main
-These are the first few lines of output:
-```
 Starting program: /w/home.24/cs/ugrad/.../cs33/CS33-AVENGERS-e2e5cfa7c26e74cdd23365d1ab1bf768967c7a92/InfinityWar 
 
 Breakpoint 1, main () at Stones.c:63
 63	Stones.c: No such file or directory.
 Missing separate debuginfos, use: debuginfo-install glibc-2.17-260.el7_6.3.x86_64
-(gdb) disassemble main
-Dump of assembler code for function main:
-   0x0000000000400769 <+0>:	push   %rbp
-   0x000000000040076a <+1>:	mov    %rsp,%rbp
-   0x000000000040076d <+4>:	sub    $0x10,%rsp
-=> 0x0000000000400771 <+8>:	mov    $0x4008e0,%edi
-   0x0000000000400776 <+13>:	mov    $0x0,%eax
-...
-```
-```
-(gdb) disassemble main
 ``` 
-This is the same as objdump, but we can use it to run on a specific function (which in this case is main).
-These are the first few lines of output:
+You'll stop execution just before main. If you see the "Stones.c:..." error, just ignore it. It comes up because you don't have the source file. If you want to see what instructions are in main, you can use the disassemble command.
+
 ```
+(gdb) disassemble main
 Dump of assembler code for function main:
    0x0000000000400769 <+0>:	push   %rbp
    0x000000000040076a <+1>:	mov    %rsp,%rbp
@@ -97,6 +86,9 @@ Dump of assembler code for function main:
    0x0000000000400776 <+13>:	mov    $0x0,%eax
 ...
 ```
+
+This is the same output as objdump, but we can use it to run on a specific function (which in this case is main) and it also calculates offsets for you.
+
 The arrow on the left tells you which instruction you are about to run. 
 
 ## Printing the value of registers
